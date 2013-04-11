@@ -1,19 +1,22 @@
-//
-// Implementation of the classical OOP inheritance
-//
-// Copyright 2013, Ildar Shaimordanov
-//
-// This implementation was inspired by the Dmitirii's work. 
-// It was completely re-written at the very beginning and has 
-// only common things with the original work: 
-// a) the naming convention of the base functions and 
-// b) the same behaviour of functions used further. 
-// Follow by these links below to learn more about his original work
-// https://github.com/devote/jsClasses
-// http://javascript.ru/forum/168029-post1.html
-//
-// This work is a part of the Object.js file that is totally hosted at 
-// http://code.google.com/p/jsxt/source/browse/trunk/js/Object.js
+/*!
+
+Implementation of the classical OOP inheritance
+
+Copyright 2013, Ildar Shaimordanov
+
+This implementation was inspired by the Dmitirii's work. 
+It was completely re-written at the very beginning and has 
+only common things with the original work: 
+a) the naming convention of the base functions and 
+b) the same behaviour of functions used further. 
+Follow by these links below to learn more about his original work
+https://github.com/devote/jsClasses
+http://javascript.ru/forum/168029-post1.html
+
+This work is a part of the Object.js file that is totally hosted at 
+http://code.google.com/p/jsxt/source/browse/trunk/js/Object.js
+
+*/
 
 /**
  * Returns an array whose elements are strings corresponding 

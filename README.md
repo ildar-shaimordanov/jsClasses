@@ -13,10 +13,10 @@
 Пример создания пустого класса:
 
 ```javascript
-// "объявили" пустой класс Empty
+// "declare " the empty class Empty
 var Empty = Class( {} );
 
-// ... и создали объект
+// ... and create the object
 var e = new Empty();
 ```
 
@@ -24,23 +24,25 @@ var e = new Empty();
 
 ```javascript
 var X = Class({
-	// Конструктор объекта
+	// The object's constructor
 	constructor: function(x)
 	{
-		// Сохранить переданное значение в свойствах
+		// Store an argument to properties
 		this.p = x;
 	}, 
-	// Некоторый метод
+	// An object's method
 	alert: function()
 	{
-		// Отобразить свойство
+		// Show the property
 		alert(this.p);
 	}
 });
 
+// Instantiate two objects
 var x1 = new X(1);
 var x2 = new X(1000);
 
+// ... and call their methods
 x1.alert();
 x2.alert();
 ```
@@ -51,25 +53,25 @@ x2.alert();
 Для работы с приватными свойтвами необходимо объявить класс, передав в качестве аргумента функцию. Фактически, функция, являясь оберткой, возвращающей структуру объекта, создаст новое пространство имен, которое будет доступно только одному экземпляру данного класса. 
 
 ```javascript
-// Класс, который умеет работать с приватными свойствами
+//The class is able to process with private data
 var X = Class(function()
 {
-	// Приватная переменная. 
-	// Видна только изнутри экземпляров класса
-	// Уникальна для каждого экземпляра
+	// Private variable
+	// It is visible from the instance of the object
+	// It is unique per each instance
 	var p;
 
 	return {
-		// Конструктор объекта
+		// Constructor
 		constructor: function(x)
 		{
-			// Созранить значение в приватном свойтве
+			// Store an argument to the private variable
 			p = x;
 		}, 
-		// Некоторый метод
+		// Accessor to the private variable
 		alert: function()
 		{
-			// Показать значение
+			// Display the variable
 			alert(p);
 		}
 	};
@@ -88,32 +90,30 @@ x2.alert();
 Наследование реализовано просто. 
 
 ```javascript
-// Класс "X" объявлен в предыдущем примере
-// Здесь мы унаследуем от него все его свойства и методы
-// Родительские методы можно перекрывать, реализуя тем самым полиморфизм
-// Есть возможность вызова родительского метода через специальное свойство
+// The class "X" was declared in the previous example
+// We inherits all properties and method of the parental class
+// Parental methods can be overwritten by the inherited class
+// It is possible to call parental methods via the special property
 var Y = Class(X, function()
 {
-	// Приватная переменная. 
-	// Видна только изнутри экземпляров класса
-	// Уникальна для каждого экземпляра
+	// Private variable
 	var p;
 
 	return {
-		// Конструктор объекта
+		// Constructor
 		constructor: function(x, y)
 		{
-			// Вызвать родительский конструктор для инициализации его значения
+			// Call the parental constructor
 			this.parent.constructor(x);
-			// Созранить значение в приватном свойтве
+			// Store its own argument privately
 			p = y;
 		}, 
-		// Некоторый метод
+		// Accessor
 		alert: function()
 		{
-			// Вызвать родительский метод
+			// Call the parental methos to display parentall property
 			this.parent.alert();
-			// Показать значение
+			// Display the own property
 			alert(p);
 		}
 	};
@@ -129,10 +129,15 @@ instanceof
 Стандартный оператор instanceof в данной реализации не работает. Для правильной проверки принадлежности объекта классу существует метод Class.instanceOf
 
 ```javascript
+// The "instanceof" operator doesn't work properly
+// That's why we need to implement our own statuic method called as "Class.instanceOf", 
+// that checks the chain of inheritance looking over special property of each instance in the chain
 alert([
-	y instanceof X, // == false, потому что родительский конструктор не в цепочке прототипов
-	y instanceof Y, // == true, "y" является экземпляром класс "Y"
+	y instanceof Object, // == ttrue, because all objects are derived from Object
+	y instanceof X, // == false, because the parental constructor is not in the chain of prototypes
+	y instanceof Y, // == true, "y" is instantiated from the class "Y"
 
+	Class.instanceOf(y, Object), // == true
 	Class.instanceOf(y, X), // == true
 	Class.instanceOf(y, Y), // == true
 ]);

@@ -104,7 +104,7 @@ var Y = Class(X, function()
 		constructor: function(x, y)
 		{
 			// Call the parental constructor
-			this.parent.constructor(x);
+			this.parent(x);
 			// Store its own argument privately
 			p = y;
 		}, 
@@ -112,7 +112,7 @@ var Y = Class(X, function()
 		alert: function()
 		{
 			// Call the parental methos to display parentall property
-			this.parent.alert();
+			this.parent();
 			// Display the own property
 			alert(p);
 		}
@@ -137,8 +137,8 @@ alert([
 	y instanceof X, // == false, because the parental constructor is not in the chain of prototypes
 	y instanceof Y, // == true, "y" is instantiated from the class "Y"
 
-	Class.instanceOf(y, Object), // == true
-	Class.instanceOf(y, X), // == true
-	Class.instanceOf(y, Y), // == true
+	y.instanceOf(Object), // == true
+	y.instanceOf(X), // == true
+	y.instanceOf(Y), // == true
 ]);
 ```

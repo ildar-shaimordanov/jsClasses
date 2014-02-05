@@ -259,7 +259,7 @@ var Class = (function()
 
 			// Remove definitions of service methods
 			delete object.parent;
-			delete object.instanceOf
+			delete object.instanceOf;
 
 			// Define a constructor if it isn't defined
 			object.constructor = object.constructor || function()
